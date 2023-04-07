@@ -8,11 +8,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Laravel Daraja</title>
+
+    <style>
+        #mpesaresponse {
+            height: 200px;
+            overflow: auto;
+        }
+    </style>
+
+
+
 </head>
 <body>
     <div class="container">
-        <div class="row mt-5">
-            <div class="col-sm-8 mx-auto">
+        <div class="row mt-3">
+            <div class="col-sm-4 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         Obtain Access Token
@@ -51,9 +61,9 @@
                 </div>
             </div>
             <!-- Sidebar -->
-            <div class="col-md-4">
-                <div class="sidebar">
-                    <p>This is the sidebar text area</p>
+            <div class="col-md-8 border border-success">
+                <div class="sidebar" id="mpesaresponse" style="background-color: #f2f2f2; padding: 20px; border: 1px solid #ccc;">
+                    <p id="mpesaresponse">MPesa Response here</p>
                 </div>
             </div>
         </div>
@@ -75,6 +85,16 @@
                 //alert(response);
                 console.log(response);
                 document.getElementById('access_token').innerHTML= response.data;
+                //document.getElementById('mpesaresponse').innerHTML= response.data;
+                // Assuming the mpesaresponse element is already defined
+                const mpesaResponseElement = document.getElementById('mpesaresponse');
+
+                // Clear the current content of the element
+                mpesaResponseElement.innerHTML = '';
+
+                // Add the response content to the element
+                mpesaResponseElement.innerHTML = `<pre><code>${JSON.stringify(response.data, null, 2)}</code></pre>`;
+
             }).catch((error)=>
             {
                 console.log(error);
@@ -89,10 +109,24 @@
     .then((response)=>{
         console.log(response);
         if(response.data.ResponseDescription){
+            //)
             document.getElementById('response').innerHTML = response.data.ResponseDescription;
+            //document.getElementById('mpesaresponse').innerHTML= JSON.stringify(response.data);
+
+                        // Assuming the mpesaresponse element is already defined
+                        const mpesaResponseElement = document.getElementById('mpesaresponse');
+
+                        // Clear the current content of the element
+                        mpesaResponseElement.innerHTML = '';
+
+                        // Add the response content to the element
+                        mpesaResponseElement.innerHTML = `<pre><code>${JSON.stringify(response.data, null, 2)}</code></pre>`;
+
+
 
         }else{
             document.getElementById('response').innerHTML = "Register URL wasn't succesfull because :"+response.data.errorMessage;
+
 
         }
 
@@ -114,7 +148,21 @@ document.getElementById('simulate').addEventListener('click', (event) => {
     axios.post('/simulate', requestBody)
     .then((response) => {
         if(response.data.ResponseDescription){
+
+
             document.getElementById('c2b_response').innerHTML = response.data.ResponseDescription
+
+                        // Assuming the mpesaresponse element is already defined
+            const mpesaResponseElement = document.getElementById('mpesaresponse');
+
+            // Clear the current content of the element
+            mpesaResponseElement.innerHTML = '';
+
+            // Add the response content to the element
+            mpesaResponseElement.innerHTML = `<pre><code>${JSON.stringify(response.data, null, 2)}</code></pre>`;
+                        //document.getElementById('mpesaresponse').innerHTML= JSON.stringify(response.data);
+
+
         } else {
             document.getElementById('c2b_response').innerHTML = response.data.errorMessage
         }
