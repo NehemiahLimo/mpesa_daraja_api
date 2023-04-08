@@ -62,7 +62,7 @@
             </div>
             <!-- Sidebar -->
             <div class="col-md-8 border border-success">
-                <div class="sidebar" id="mpesaresponse" style="background-color: #f2f2f2; padding: 20px; border: 1px solid #ccc;">
+                <div class="sidebar" id="mpesaresponse" style="background-color: #f2f2f2; margin-top:20px; padding: 20px; border: 1px solid #ccc;">
                     <p id="mpesaresponse">MPesa Response here</p>
                 </div>
             </div>
